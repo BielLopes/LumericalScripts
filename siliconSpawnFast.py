@@ -84,6 +84,12 @@ fdtd.set('wavelength span', 0.0)
 ###### CILINDERS GENERATION ########
 ####################################
 
+fdtd.addstructuregroup()
+fdtd.set("name", "Cilinders Group")
+fdtd.set("x", 0.0)
+fdtd.set("y", 0.0)
+fdtd.set("z", Zsize/2.0)
+
 z_span = 0.22e-6
 index = 1.4
 material = 'etch'
@@ -96,40 +102,56 @@ n_rows = 2*round((ny-1)/2)
 n_cols = nx
 even_flag = 0
 
-fdtd.addstructuregroup()
-fdtd.set("name", "Cilinders Group")
-fdtd.set("x", 0.0)
-fdtd.set("y", 0.0)
-fdtd.set("z", Zsize/2.0)
-fdtd.groupscope("Cilinders Group")
+fdtd.set("construction group", True)
+fdtd.set("Script", """
+z_span = {z_span};
+index = {index};
+material = {material};
+ny = {ny};
+nx = {nx};
+a = {a};
+radius = {radius};
 
-for i in range(round(-n_rows/2), round(n_rows/2)):
-  for j in range(1, n_cols):
+n_rows = {n_rows};
+n_cols = {n_cols};
+even_flag = 0;
 
-    if i != 0:
-      fdtd.addcircle()
-      fdtd.set("radius",radius)    
+for(i=round(-n_rows/2):round(n_rows/2)) {
+  for(j=1:n_cols) {
+    if(i!=0){
+      addcircle;    
+      set("radius",radius);      
+      if( even_flag==0 ) {
+        set("x",(j-1)*a + a/2);        
+      } else {
+        set("x",(j-1)*a);
+      }
+      set("y",(i)*a*sqrt(3)/2);
+      set("z",0);
+      set("z span",z_span);
+      set("material",material);
+      if(get("material")=="<Object defined dielectric>")
+	{ set("index",index); } 
+    }
+  }
+  if(even_flag==0) {
+    even_flag=1;
+  } else {
+    even_flag=0;
+  }
+}
 
-      if even_flag == 0:
-        fdtd.set("x",(j-1)*a + a/2)
-      else:
-        fdtd.set("x",(j-1)*a)
+""".replace('{z_span}', str(z_span))
+	 .replace('{index}', str(index))
+	 .replace('{material}', '\''+material+'\'')
+	 .replace('{ny}', str(ny))
+	 .replace('{nx}', str(nx))
+	 .replace('{a}', str(a))
+	 .replace('{radius}', str(radius))
+	 .replace('{n_rows}', str(n_rows))
+	 .replace('{n_cols}', str(n_cols))
 
-      fdtd.set("y",(i)*a*np.sqrt(3)/2)
-      fdtd.set("z",0)
-      fdtd.set("z span",z_span)
-      fdtd.set("material",material)
-
-      if fdtd.get("material") == "<Object defined dielectric>":
-      	fdtd.set("index",index)
-
-  if even_flag == 0:
-    even_flag=1
-  else:
-    even_flag=0
+)
 
 
-fdtd.groupscope('::model');
-
-
-fdtd.save('SiliconWaveGuide.fsp')
+fdtd.save('SiliconTest.fsp')

@@ -1,0 +1,45 @@
+z_span = 0.22e-6;
+index = 1.4;
+material = 'etch';
+ny = 21;
+nx = 40;
+a = 0.5e-6;
+radius = 0.16e-6;
+
+n_rows = 2*round((ny-1)/2);
+n_cols = nx;
+even_flag = 0;
+
+addstructuregroup;
+set("name", "Cilinders Group");
+set("x", 0.0);
+set("y", 0.0);
+set("z", 0.11e-6);
+groupscope("Cilinders Group");
+
+for(i=round(-n_rows/2):round(n_rows/2)) {
+  for(j=1:n_cols) {
+    if(i!=0){
+      addcircle;    
+      set("radius",radius);      
+      if( even_flag==0 ) {
+        set("x",(j-1)*a + a/2);        
+      } else {
+        set("x",(j-1)*a);
+      }
+      set("y",(i)*a*sqrt(3)/2);
+      set("z",0);
+      set("z span",z_span);
+      set("material",material);
+      if(get("material")=="<Object defined dielectric>")
+	{ set("index",index); } 
+    }
+  }
+  if(even_flag==0) {
+    even_flag=1;
+  } else {
+    even_flag=0;
+  }
+}
+
+groupscope('::model');
