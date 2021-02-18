@@ -118,7 +118,7 @@ even_flag = 0;
 
 for(i=round(-n_rows/2):round(n_rows/2)) {
   for(j=1:n_cols) {
-    if(i!=0){
+    if(i!=-4 | j > 15){
       addcircle;    
       set("radius",radius);      
       if( even_flag==0 ) {

@@ -9,6 +9,7 @@ radius = 0.16e-6;
 n_rows = 2*round((ny-1)/2);
 n_cols = nx;
 even_flag = 0;
+new_even_flag = 1;
 
 addstructuregroup;
 set("name", "Cilinders Group");
@@ -16,10 +17,12 @@ set("x", 0.0);
 set("y", 0.0);
 set("z", 0.11e-6);
 groupscope("Cilinders Group");
+count1 = 1;
+count2 = 1;
 
 for(i=round(-n_rows/2):round(n_rows/2)) {
   for(j=1:n_cols) {
-    if(i!=0){
+    if(i!=-4 & j<15){
       addcircle;    
       set("radius",radius);      
       if( even_flag==0 ) {
@@ -33,6 +36,31 @@ for(i=round(-n_rows/2):round(n_rows/2)) {
       set("material",material);
       if(get("material")=="<Object defined dielectric>")
 	{ set("index",index); } 
+    } else if(j>=15){
+      if ( (new_even_flag==1 & i-j != (-4+count2)-(15+count1)) | (new_even_flag==0 & i-j != (-4+count2)-(15+count1)-1)){
+        addcircle;    
+        set("radius",radius);      
+        if( even_flag==0 ) {
+          set("x",(j-1)*a + a/2);        
+        } else {
+          set("x",(j-1)*a);
+        }
+        set("y",(i)*a*sqrt(3)/2);
+        set("z",0);
+        set("z span",z_span);
+        set("material",material);
+        if(get("material")=="<Object defined dielectric>")
+  	{ set("index",index); }         
+      } else {
+          if(new_even_flag==1) {
+            new_even_flag=0;
+            count2 = count2 + 1;
+          } else {
+            new_even_flag=1;
+            count1 = count1 + 1;
+            count2 = count2 + 1;
+          }
+      }
     }
   }
   if(even_flag==0) {
