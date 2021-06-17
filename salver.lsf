@@ -1,0 +1,7 @@
+for(k=1:22) {
+	if(Ts(k, 5) == optmo){
+		print('A posição:');
+		print(k);
+		write('TsData.txt', num2str(Ts(k, 1))+' '+num2str(Ts(k, 2))+' '+num2str(Ts(k, 3))+' '+num2str(Ts(k, 4))+' '+num2str(Ts(k, 5)));
+	}
+}

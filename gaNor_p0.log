@@ -1,0 +1,93 @@
+Ansys Lumerical 2020 R2 FDTD Solver Version 8.24.2387 (Windows 64bit)
+ expires (month/day/year): 12/31/2035
+using config file: Ansys Licensing set with ANSYSLMD_LICENSE_FILE
+license host: 
+current time: Wed May 19 16:05:47 2021
+Running on host: DESKTOP-LGBJ0BJ
+host available memory (GB): 11.106243
+All processes are communicating and ready to proceed to simulation...
+Running fsp file: C:\Program Files\Lumerical\v202\bin\fdtd-engine-msmpi.exe -t 1 -remote C:/Users/Roposos/Documents/LumericalScripts/LumericalScripts/gaNor.fsp
+Starting meshing
+Simulation size in gridpoints: 1 x 27 x 1
+Refined 0 mesh cells (0%)
+Completed meshing!
+Meshing complete in 0 seconds of CPU time
+Starting meshing
+Simulation size in gridpoints: 1 x 27 x 1
+Refined 0 mesh cells (0%)
+Completed meshing!
+Meshing complete in 0.015625 seconds of CPU time
+Starting meshing
+Simulation size in gridpoints: 1 x 27 x 1
+Refined 0 mesh cells (0%)
+Completed meshing!
+Meshing complete in 0 seconds of CPU time
+number of processors is 8
+processors are distributed as: 4x2x1
+Running 2D Simulation
+Starting meshing
+Simulation size in gridpoints: 120 x 185 x 1
+Refined 0 mesh cells (0%)
+Completed meshing!
+Meshing complete in 0.03125 seconds of CPU time
+0 0
+Starting meshing
+Simulation size in gridpoints: 120 x 185 x 1
+Refined 0 mesh cells (0%)
+Completed meshing!
+Meshing complete in 0.03125 seconds of CPU time
+0 0
+finished material properties
+Selected kernel with optimization level: 2 and split-field propagation direction: 0
+Starting meshing
+Simulation size in gridpoints: 120 x 185 x 1
+Refined 0 mesh cells (0%)
+Completed meshing!
+Meshing complete in 0.03125 seconds of CPU time
+0 0
+Selected kernel with optimization level: 2 and split-field propagation direction: 0
+-----------------------------------------
+Beginning initialization of 2D FDTD Simulation
+  Including TE Simulation
+Starting to add sources to simulation
+
+Adding Mode source propagating in X
+Starting to add boundary conditions to simulation
+Adding PML BC
+Adding parallel BC
+Adding PML BC
+Adding parallel BC
+Starting to add monitors to Simulation
+Adding analysis monitor
+Adding frequency monitor
+Finished initialization of 2D Simulation
+-----------------------------------------
+All processes are communicating and ready to proceed to simulation...
+Starting 51948 total iterations
+0.0923995% complete. Max time remaining: 9 secs. Auto Shutoff: 1
+1.94039% complete. Max time remaining: 8 secs. Auto Shutoff: 0.837343
+3.91158% complete. Max time remaining: 8 secs. Auto Shutoff: 0.802559
+7.85396% complete. Max time remaining: 8 secs. Auto Shutoff: 0.207109
+15.7387% complete. Max time remaining: 8 secs. Auto Shutoff: 0.0711536
+31.5082% complete. Max time remaining: 7 secs. Auto Shutoff: 0.0205121
+47.2778% complete. Max time remaining: 5 secs. Auto Shutoff: 0.0147469
+63.0473% complete. Max time remaining: 4 secs. Auto Shutoff: 0.0072226
+78.8168% complete. Max time remaining: 2 secs. Auto Shutoff: 0.00458992
+94.5863% complete. Max time remaining: 1 secs. Auto Shutoff: 0.00381898
+99.9994% complete. Max time remaining: 0 secs. Auto Shutoff: 0.00359313
+Completed 51948 iterations, or 4.999970e-12s of Simulation Time
+Process 0 starting to collect data
+    collecting TM monitor data
+    collecting TE monitor data
+    collecting TM source data
+    collecting TE source data
+Finished collecting data
+Simulation completed successfully at: Wed May 19 16:05:57 2021
+Overall wall time measurements in seconds: 10.8927
+    time to mesh and initialize: 0.17623
+    time to run FDTD simulation: 9.49342
+    time to checkpoint simulation: 2e-07
+    time to finalize data and save to files: 0.0541676
+    miscellaneous time: 1.16887
+    FDTD solver speed on process 0: 121.478 Mnodes/s
+    total FDTD solver speed on 8 processes: 971.827 Mnodes/s

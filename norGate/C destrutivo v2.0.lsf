@@ -1,0 +1,66 @@
+?"comecando";
+switchtolayout;   
+groupscope('::model');
+x_rectangle = -8.65e-006;  
+
+fim=36;
+for(i=14:33){
+    
+    y_cima=getnamed('circle-'+num2str(i-1)+'-'+num2str(fim),"y");   
+    y_baixo=getnamed('circle-'+num2str(i+1)+'-'+num2str(fim),"y"); 
+    y_meio=getnamed('circle-'+num2str(i)+'-'+num2str(fim),"y"); 
+    ?"y_cima"+num2str(y_cima);
+    ?"Y_baixo"+num2str(y_baixo);
+    
+    setnamed('source B',"y",y_meio);    
+    
+    groupscope('rectangle');
+    setnamed('rectangle3',"y",y_cima);
+    setnamed('rectangle4',"y",y_baixo);
+    if(mod(i,2)==0){
+        setnamed('rectangle3',"x",x_rectangle-(250*1e-9));
+        setnamed('rectangle4',"x",x_rectangle-(250*1e-9));
+    }
+    else{
+        setnamed('rectangle3',"x",x_rectangle);
+        setnamed('rectangle4',"x",x_rectangle);
+    }
+ groupscope('::model');
+    
+ for(j=floor(i/2):fim){
+     saida = "entrada B "+num2str(i)+" curva "+num2str(j);
+     setnamed('circle-'+num2str(i)+'-'+num2str(j), 'enabled', false);     
+     setnamed('circle-'+num2str(i-1)+'-'+num2str(j), 'enabled', false);
+     
+     for(k=i-1; k>=12; k=k-1){
+         setnamed('circle-'+num2str(k)+'-'+num2str(j+1), 'enabled', false);
+     }
+     
+     pause(1);
+     
+     	#setnamed('source A', 'enabled', true);
+	#setnamed('source B', 'enabled', false);
+
+	#run;
+	#T1 = getresult('monitor_1', 'T');
+	#saida = saida + " " + num2str(T1.T);
+	
+	#setnamed('source A', 'enabled', true);
+	#setnamed('source B', 'enabled', true);
+
+	#run;
+	#T1 = getresult('monitor_1', 'T');
+	#saida = saida + " " + num2str(T1.T);
+		
+	#write('saida.txt', saida);
+     
+     setnamed('circle-'+num2str(i-1)+'-'+num2str(j), 'enabled', true);
+     
+     for(k=i-1; k>=12; k=k-1){
+         setnamed('circle-'+num2str(k)+'-'+num2str(j+1), 'enabled', true);
+     }
+ }
+ for(j=floor(i/2):fim){
+     setnamed('circle-'+num2str(i)+'-'+num2str(j), 'enabled', true);
+ }
+}

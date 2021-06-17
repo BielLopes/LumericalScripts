@@ -1,0 +1,79 @@
+Tn = matrix(2, 5);
+
+switchtolayout;
+
+groupscope('500');
+setnamed('circle A', 'radius', 0);
+setnamed('circle B', 'radius', 0);
+
+groupscope('::model');
+setnamed('source A', 'enabled', false);
+setnamed('source B', 'enabled', false);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(1, 1) = T1.T;
+
+switchtolayout;
+setnamed('source A', 'enabled', true);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(1, 2) = T1.T;
+
+switchtolayout;
+setnamed('source A', 'enabled', false);
+setnamed('source B', 'enabled', true);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(1, 3) = T1.T;
+
+switchtolayout;
+setnamed('source A', 'enabled', true);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(1, 4) = T1.T;
+
+Tn(1, 5) = (Tn(1, 1) + Tn(1, 2) + Tn(1, 3))/3 - Tn(1, 4);
+
+switchtolayout;
+
+groupscope('500');
+setnamed('circle A', 'radius', 25e-9);
+setnamed('circle B', 'radius', 25e-9);
+
+groupscope('::model');
+setnamed('source A', 'enabled', false);
+setnamed('source B', 'enabled', false);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(2, 1) = T1.T;
+
+switchtolayout;
+setnamed('source A', 'enabled', true);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(2, 2) = T1.T;
+
+switchtolayout;
+setnamed('source A', 'enabled', false);
+setnamed('source B', 'enabled', true);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(2, 3) = T1.T;
+
+switchtolayout;
+setnamed('source A', 'enabled', true);
+
+run();
+T1 = getresult('monitor_1', 'T');
+Tn(2, 4) = T1.T;
+
+Tn(2, 5) = (Tn(1, 1) + Tn(1, 2) + Tn(1, 3))/3 - Tn(1, 4);
+
+ptrint(Tn);

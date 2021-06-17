@@ -1,0 +1,27 @@
+        switchtolayout;   
+        groupscope('::model');     
+        #altera o tamanho da junção
+        #groupscope('500');
+
+select("circle");
+#for (i=1:getnumber) {  
+    
+#    a = round(((i-1)/33)+0.5);
+#    b = mod((i-1), 33) ;
+    
+# rad=get("radius",i);
+# set("name","circle-"+num2str(a-1)+"-"+num2str(mod((i-1),33)),i);
+#}
+
+x = 0;
+colunas = 80;
+for (i=1:getnumber) {
+    
+    x = floor((i-1)/(2*colunas));
+    
+    a = floor((i-1)/colunas);
+    b = mod((i-1), colunas) ;
+    set("name","circle-"+num2str(a)+"-"+num2str(mod((i-1),colunas)+x),i);
+}
+
+
